@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сабир | Создание современных сайтов и Telegram-ботов под ключ</title>
+  <meta name="description" content="Разрабатываю быстрые, стильные сайты и умные Telegram-боты. Превращаю ваши идеи в рабочие digital-продукты, которые решают задачи бизнеса." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  
+  <!-- Three.js -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js" defer></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js" defer></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/bundled/lenis.min.js" defer></script>
+</head>
+<body>
+  <!-- Background cursor glow -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Cursor -->
+  <div class="cursor"></div>
+
+  <!-- Header -->
+  <header class="site-header" data-animate>
+    <div class="container row between center">
+      <a href="#home" class="brand" aria-label="SI home">
+        <span class="brand-mark" aria-hidden="true">SI</span>
+      </a>
+      <nav class="nav">
+        <a href="#work" class="nav-link">Работы</a>
+        <a href="#services" class="nav-link">Услуги</a>
+        <a href="#about" class="nav-link">Обо мне</a>
+        <a href="#contact" class="nav-link">Контакты</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0-16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1Zm10-7a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1ZM4 12a1 1 0 0 1-1 1H2a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1Zm14.95 6.536a1 1 0 0 1-1.414 1.414l-.707-.707a1 1 0 1 1 1.414-1.414l.707.707ZM6.464 6.464A1 1 0 1 1 5.05 5.05l.707-.707A1 1 0 0 1 7.17 5.757l-.707.707Zm11.314-2.121a1 1 0 0 1 0 1.414l-.707.707A1 1 0 1 1 15.657 5.05l.707-.707a1 1 0 0 1 1.414 0ZM7.171 18.243a1 1 0 0 1 0 1.414l-.707.707A1 1 0 0 1 5.05 18.95l.707-.707a1 1 0 0 1 1.414 0Z"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79Z"/></svg>
+        <span class="toggle-label">Тема</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero" data-animate>
+    <div class="container hero-content">
+      <div class="hero-eyebrow">Сайты и Telegram-боты под ключ</div>
+      <div class="hero-title-wrap">
+        <div class="hero-3d" aria-hidden="true">
+          <div class="hero-3d-glow" aria-hidden="true"></div>
+          <canvas id="hero3d"></canvas>
+        </div>
+        <h1 class="hero-title">Превращаю идеи в digital‑продукты, которые работают на результат</h1>
+      </div>
+      <p class="hero-sub">Создаю не просто красивые интерфейсы, а инструменты для роста бизнеса: от быстрых сайтов‑визиток до сложных ботов с AI.</p>
+      <div class="hero-cta row">
+        <a href="#work" class="btn btn-primary">Смотреть кейсы</a>
+        <a href="#contact" class="btn btn-ghost">Обсудить проект</a>
+      </div>
+    </div>
+
+    <!-- Hero marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>удобный интерфейс</span><span>анимация</span><span>производительность</span><span>ux</span>
+        <span>дизайн</span><span>telegram-боты</span><span>искусственный интеллект</span><span>ui</span>
+        <span>удобный интерфейс</span><span>анимация</span><span>производительность</span><span>ux</span>
+        <span>дизайн</span><span>движение</span><span>искусственный интеллект</span><span>ui</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="work" data-animate>
+    <div class="container">
+      <div class="section-head row between end">
+        <h2 class="section-title">Мои работы</h2>
+        <span class="section-note">Кейсы с измеримым результатом</span>
+      </div>
+
+      <div class="cases">
+        <!-- Case item 1 -->
+        <div class="case" data-preview="#8A2BE2" data-label="Telegram-бот с AI">
+          <button class="case-toggle" type="button" aria-expanded="false" aria-controls="case-1">
+            <div class="case-left">
+              <div class="case-title">EVA: Telegram-бот с AI для консультаций</div>
+              <div class="case-tags">Python · AI (GPT) · Telebot</div>
+            </div>
+            <div class="case-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="M8.12 9.29a1 1 0 0 1 1.41 0L12 11.75l2.47-2.46a1 1 0 1 1 1.41 1.41l-3.18 3.18a1.5 1.5 0 0 1-2.12 0L8.12 10.7a1 1 0 0 1 0-1.41Z"/></svg>
+            </div>
+          </button>
+          <div class="case-extra" id="case-1" hidden>
+            <p>Интеллектуальный бот для консультаций: сценарии диалогов, интеграция с GPT, гибкие настройки и логирование. Включает админ‑панель и интеграцию с внешними сервисами.</p>
+            <a class="btn btn-primary" href="case-eva.html" data-transition="case">Перейти к кейсу</a>
+          </div>
+        </div>
+
+        <!-- Case item 2 -->
+        <div class="case" data-preview="#00B894" data-label="Analytics Dashboard">
+          <button class="case-toggle" type="button" aria-expanded="false" aria-controls="case-2">
+            <div class="case-left">
+              <div class="case-title">Сайт для военно-спортивного клуба «Хищник»</div>
+              <div class="case-tags">React · Node.js · Адаптивная верстка</div>
+            </div>
+            <div class="case-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="M8.12 9.29a1 1 0 0 1 1.41 0L12 11.75l2.47-2.46a1 1 0 1 1 1.41 1.41l-3.18 3.18a1.5 1.5 0 0 1-2.12 0L8.12 10.7a1 1 0 0 1 0-1.41Z"/></svg>
+            </div>
+          </button>
+          <div class="case-extra" id="case-2" hidden>
+            <p>Современный сайт с упором на скорость и адаптивность: удобная структура, формы заявок и интеграции. Внимание к производительности и SEO.</p>
+            <a class="btn btn-primary" href="case-hishnik.html" data-transition="case">Перейти к кейсу</a>
+          </div>
+        </div>
+
+        <!-- Case item 3 -->
+        <div class="case" data-preview="#FF7675" data-label="Portfolio Experience">
+          <button class="case-toggle" type="button" aria-expanded="false" aria-controls="case-3">
+            <div class="case-left">
+              <div class="case-title">Еще работы</div>
+              <div class="case-tags">HTML · CSS · JS</div>
+            </div>
+            <div class="case-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="M8.12 9.29a1 1 0 0 1 1.41 0L12 11.75l2.47-2.46a1 1 0 1 1 1.41 1.41l-3.18 3.18a1.5 1.5 0 0 1-2.12 0L8.12 10.7a1 1 0 0 1 0-1.41Z"/></svg>
+            </div>
+          </button>
+          <div class="case-extra" id="case-3" hidden>
+            <p>Подборка дополнительных проектов: минималистичные интерфейсы, анимации, чистый код и продуманная архитектура. Примеры реальных задач.</p>
+            <a class="btn btn-primary" href="more-works.html" data-transition="case">Перейти к кейсу</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case tiles with images -->
+  <!-- <section id="cases" class="case-tiles" data-animate>
+    <div class="container">
+      <div class="section-head row between end">
+        <h2 class="section-title">Проекты в фокусе</h2>
+        <span class="section-note">Параллакс и hover</span>
+      </div>
+      <div class="tiles">
+        <a class="tile" href="case-ecommerce.html" data-transition="case">
+          <div class="tile-media" data-parallax>
+            <img src="my_project/project_1.png" alt="E‑commerce System" loading="lazy" />
+          </div>
+          <div class="tile-foot">
+            <div class="tile-title">E‑commerce System</div>
+            <div class="tile-tags">React · Node · Stripe</div>
+          </div>
+        </a>
+        <a class="tile" href="case-analytics.html" data-transition="case">
+          <div class="tile-media" data-parallax>
+            <img src="my_project/project_2.png" alt="Analytics Dashboard" loading="lazy" />
+          </div>
+          <div class="tile-foot">
+            <div class="tile-title">Analytics Dashboard</div>
+            <div class="tile-tags">Vue · D3 · Express</div>
+          </div>
+        </a>
+        <a class="tile" href="case-portfolio.html" data-transition="case">
+          <div class="tile-media" data-parallax>
+            <img src="my_project/project_3.png" alt="Portfolio Experience" loading="lazy" />
+          </div>
+          <div class="tile-foot">
+            <div class="tile-title">Portfolio Experience</div>
+            <div class="tile-tags">HTML · SASS · JS</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Services -->
+  <section id="services" class="services" data-animate>
+    <div class="container">
+      <div class="section-head row between end">
+        <h2 class="section-title">Мои услуги</h2>
+        <span class="section-note">Что вы получите</span>
+      </div>
+
+      <div class="service-grid">
+        <div class="service">
+          <div class="service-head row between center">
+            <h3 class="service-title">Разработка сайтов</h3>
+            <span class="service-index">01</span>
+          </div>
+          <p class="service-text">От лендингов до корпоративных сайтов. Создаю быстрые, адаптивные и удобные для пользователей интерфейсы, которые помогают достигать бизнес-целей: собирать заявки, презентовать услуги, увеличивать продажи.</p>
+          <div class="service-text"><strong>Технологии:</strong>
+  <div class="tech-badges" role="list" aria-label="Технологический стек">
+    <span class="tech-badge tech--nocode" role="listitem">Tilda</span>
+    <span class="tech-badge tech--nocode" role="listitem">WordPress</span>
+    <span class="tech-badge tech--fe" role="listitem">HTML</span>
+    <span class="tech-badge tech--fe" role="listitem">CSS</span>
+    <span class="tech-badge tech--fe" role="listitem">JS</span>
+    <span class="tech-badge tech--fe" role="listitem">React</span>
+  </div>
+</div>
+        </div>
+        <div class="service">
+          <div class="service-head row between center">
+            <h3 class="service-title">Telegram-боты любой сложности</h3>
+            <span class="service-index">02</span>
+          </div>
+          <p class="service-text">Автоматизирую рутину, коммуникацию и даже продажи. Боты для поддержки клиентов, онлайн-записи, интеграции с базами данных, платёжными системами и искусственным интеллектом (ChatGPT).</p>
+          <div class="service-text"><strong>Технологии:</strong>
+  <div class="tech-badges" role="list" aria-label="Технологический стек">
+    <span class="tech-badge tech--be" role="listitem">Python</span>
+    <span class="tech-badge tech--be" role="listitem">Aiogram</span>
+    <span class="tech-badge tech--be" role="listitem">Telebot</span>
+    <span class="tech-badge tech--be" role="listitem">Node.js</span>
+    <span class="tech-badge tech--be" role="listitem">API</span>
+    <span class="tech-badge tech--be" role="listitem">AI</span>
+  </div>
+</div>
+        </div>
+        <div class="service">
+          <div class="service-head row between center">
+            <h3 class="service-title">Техническая оптимизация и доработки</h3>
+            <span class="service-index">03</span>
+          </div>
+          <p class="service-text">Ускорю ваш существующий сайт, улучшу SEO-ядро, добавлю новый функционал (формы, калькуляторы, личные кабинеты) или подключу сторонние сервисы (платежи, CRM, телефонию).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about" data-animate>
+    <div class="container two-col">
+      <div class="about-col">
+        <h2 class="section-title">Мой подход к работе</h2>
+        <p>Я верю, что хороший digital-продукт начинается с глубокого понимания задачи. Моя цель — не просто написать код, а создать решение, которое будет приносить пользу вашему бизнесу: экономить время, привлекать клиентов или автоматизировать процессы.</p>
+        <p>Работаю прозрачно: от погружения в задачу и предложения вариантов — до четких сроков, тестирования и поддержки после запуска. Владею полным стеком для реализации идей: от дизайна интерфейса в Figma до серверной логики.</p>
+        <!-- Добавили конкретики по стеку -->
+        
+      </div>
+      <div class="about-col about-card">
+        <div class="about-stat">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path d="M10 4h4a2 2 0 0 1 2 2v1h2.5A1.5 1.5 0 0 1 20 8.5v9A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5v-9A1.5 1.5 0 0 1 5.5 7H8V6a2 2 0 0 1 2-2Zm0 3h4V6h-4v1Z"/>
+            </svg>
+          </div>
+          <div class="num">15+</div>
+          <div class="label">Успешных проектов</div>
+        </div>
+        <div class="about-stat">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path d="M6 2a1 1 0 0 0-1 1v1H4a2 2 0 0 0-2 2v2h20V6a2 2 0 0 0-2-2h-1V3a1 1 0 1 0-2 0v1H7V3a1 1 0 0 0-1-1ZM22 10H2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-8Zm-6.293 3.293a1 1 0 0 1 1.414 1.414l-3.5 3.5a1 1 0 0 1-1.414 0l-1.5-1.5a1 1 0 1 1 1.414-1.414l.793.793 2.793-2.793Z"/>
+            </svg>
+          </div>
+          <div class="num">3 года</div>
+          <div class="label">Коммерческого опыта</div>
+        </div>
+        <div class="about-stat">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.707 7.293a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414l1.293 1.293 4.293-4.293a1 1 0 0 1 1.414 0Z"/>
+            </svg>
+          </div>
+          <div class="num">100%</div>
+          <div class="label">Проектов сдан в срок</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact" data-animate>
+    <div class="container">
+      <div class="contact-card">
+        <h2 class="section-title">Готовы обсудить ваш проект?</h2>
+        <p>Расскажите о вашей задаче, и я подготовлю предварительный план, оценку сроков и стоимости. Отвечу в течение 24 часов.</p>
+        <div class="contact-actions row">
+          <a class="btn btn-primary" target="_blank" href="https://t.me/hard_skil">Написать в Telegram</a>
+          <a class="btn btn-ghost" href="mailto:sabirivasov@gmail.com">Написать на почту</a>
+          <a class="btn btn-ghost" target="_blank" href="https://github.com/Sabir44ka">Посмотреть код на GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- Page transition layer -->
+  <div class="page-transition" aria-hidden="true"></div>
+
+  <footer class="footer">
+    <div class="container row between center">
+      <div class="brand tiny">SI</div>
+      <div class="foot-note">© 2025 — Сабир. Разработка сайтов и Telegram-ботов</div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Наверх" title="Наверх" hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41Z" fill="currentColor"/></svg>
+  </button>
+
+  <script src="script.js" defer></script>
+  <script>
+    // Back-to-top visibility on mobile
+    (function(){
+      const btn = document.querySelector('.back-to-top');
+      if (!btn) return;
+      function onScroll(){
+        const y = window.scrollY || window.pageYOffset;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (isMobile && y > 400) { btn.hidden = false; btn.classList.add('is-visible'); }
+        else { btn.classList.remove('is-visible'); btn.hidden = true; }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    })();
+  </script>
+</body>
+</html>
