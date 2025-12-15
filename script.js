@@ -13,120 +13,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(setHeaderVar).catch(() => {})
   }
-  // 3D hero object (Three.js plexiglass)
-  const heroCanvas = document.getElementById('hero3d')
-  let three = { renderer: null, scene: null, camera: null, mesh: null, material: null, raf: 0, st: null }
-  const initHero3D = () => {
-    if (!heroCanvas || !window.THREE) return
-    const { Scene, PerspectiveCamera, WebGLRenderer, CapsuleGeometry, SphereGeometry, Group, MeshPhysicalMaterial, MeshBasicMaterial, Mesh, Color, HemisphereLight, DirectionalLight, AdditiveBlending } = window.THREE
-    const scene = new Scene()
-    const camera = new PerspectiveCamera(35, heroCanvas.clientWidth / heroCanvas.clientHeight, 0.1, 100)
-    camera.position.set(0, 0, 6)
-    const renderer = new WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true, powerPreference: 'high-performance' })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
-    const resize = () => {
-      const w = heroCanvas.clientWidth, h = heroCanvas.clientHeight
-      renderer.setSize(w, h, false)
-      camera.aspect = w / Math.max(h, 1)
-      camera.updateProjectionMatrix()
-    }
-    resize()
-    window.addEventListener('resize', resize)
-
-    // Lights for plexi
-    const hemi = new HemisphereLight(0xffffff, 0x222222, 0.8)
-    const dir = new DirectionalLight(0xffffff, 0.8); dir.position.set(3, 5, 4)
-    scene.add(hemi, dir)
-
-    // Geometry: plus from boxes (no rounding) with plexiglass material
-    const mat = new MeshPhysicalMaterial({
-      color: new Color(0xffffff),
-      metalness: 0.0,
-      roughness: 0.2,
-      transmission: 0.6,
-      transparent: true,
-      opacity: 0.98,
-      ior: 1.5,
-      thickness: 1.2,
-      clearcoat: 1,
-      clearcoatRoughness: 0.06,
-      reflectivity: 0.55
-    })
-    const plus = new Group()
-    const armA = new Mesh(new CapsuleGeometry(0.24, 0.8, 16, 24), mat)
-    const armB = new Mesh(new CapsuleGeometry(0.24, 0.8, 16, 24), mat)
-    armB.rotation.z = Math.PI / 2
-    plus.add(armA, armB)
-    plus.position.set(0.0, -0.2, 0) // under the text
-
-    // Removed glow shell to keep 3D object clean
-    scene.add(plus)
-
-    // Save refs
-    three = { renderer, scene, camera, mesh: plus, material: mat, glowMaterial: null, raf: 0, st: null }
-
-    // Scroll‑based rotation
-    if (window.ScrollTrigger) {
-      three.st = window.ScrollTrigger.create({
-        trigger: document.querySelector('.hero'), start: 'top top', end: 'bottom top', scrub: true,
-        onUpdate: (self) => { if (three.mesh) { three.mesh.rotation.y = self.progress * Math.PI * 2; three.mesh.rotation.x = 0.6 + self.progress * 0.7 } }
-      })
-    }
-
-    // Mouse parallax targets
-    const target = { rx: 0.4, ry: 0.6, px: 1.8, py: 0.2 }
-    const onMouse = (e) => {
-      const rect = renderer.domElement.getBoundingClientRect()
-      const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1
-      const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1
-      target.ry = 0.6 + nx * 0.4
-      target.rx = 0.4 + ny * 0.3
-      target.px = 1.8 + nx * 0.2
-      target.py = 0.2 - ny * 0.15
-    }
-    window.addEventListener('mousemove', onMouse)
-
-    // RAF animate
-    const tick = () => {
-      three.raf = requestAnimationFrame(tick)
-      if (three.mesh) {
-        // lerp to target
-        three.mesh.rotation.x += (target.rx - three.mesh.rotation.x) * 0.06
-        three.mesh.rotation.y += (target.ry - three.mesh.rotation.y) * 0.06
-        three.mesh.position.x += (target.px - three.mesh.position.x) * 0.06
-        three.mesh.position.y += (target.py - three.mesh.position.y) * 0.06
-        three.mesh.rotation.z += 0.0018
-      }
-      renderer.render(scene, camera)
-    }
-    tick()
-  }
-
-  const setHero3DColorByTheme = () => {
-    const eff = document.documentElement.getAttribute('data-effective-theme') || 'dark'
-    if (three.material) {
-      if (eff === 'light') {
-        three.material.color.set(0x111111)
-        three.material.opacity = 0.92
-        if (three.glowMaterial) three.glowMaterial.color.set(0x111111), three.glowMaterial.opacity = 0.10
-      } else {
-        three.material.color.set(0xffffff)
-        three.material.opacity = 0.96
-        if (three.glowMaterial) three.glowMaterial.color.set(0xffffff), three.glowMaterial.opacity = 0.12
-      }
-      three.material.needsUpdate = true
-      if (three.glowMaterial) three.glowMaterial.needsUpdate = true
-    }
-  }
-
-  window.__updateHero3DColor = setHero3DColorByTheme
-
-  // Init 3D once DOM and THREE ready
-  if (heroCanvas) {
-    if (window.THREE) { initHero3D(); setHero3DColorByTheme() }
-    else window.addEventListener('load', () => { initHero3D(); setHero3DColorByTheme() })
-  }
-
   // Theme: apply saved or default
   const root = document.documentElement
   const mediaLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)')
@@ -155,8 +41,6 @@ window.addEventListener('DOMContentLoaded', () => {
       root.removeAttribute('data-theme') // follow system
     }
     reflectEffectiveTheme()
-    // also update 3D tint
-    if (window.__updateHero3DColor) window.__updateHero3DColor()
   }
   applyTheme()
 
@@ -182,7 +66,6 @@ window.addEventListener('DOMContentLoaded', () => {
         beginSmooth()
         applyTheme()
         setHeaderVar()
-        if (window.__updateHero3DColor) window.__updateHero3DColor()
         window.setTimeout(endSmooth, 420)
       }
     })

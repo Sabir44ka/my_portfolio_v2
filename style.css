@@ -179,23 +179,8 @@ html[data-effective-theme="dark"] .theme-toggle .icon-sun { display: none; }
 /* ========== Hero ========== */
 .hero { position: relative; overflow: hidden; }
 .hero-content { position: relative; z-index: 1; }
-.hero-title-wrap { position: relative; display: inline-block; max-width: 720px; overflow: visible; }
-.hero-title { position: relative; z-index: 3; }
-.hero-3d { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: none; }
-.hero-3d canvas { width: 100%; height: 100%; display: block; position: relative; z-index: 2; pointer-events: none; }
-.hero-3d-glow {
-  position: absolute;
-  inset: -20% -12%;
-  z-index: 1;
-  pointer-events: none;
-  filter: blur(80px);
-  opacity: 0.14;
-  background: radial-gradient(70% 70% at 50% 50%, rgba(155,135,255,0.28) 0%, rgba(155,135,255,0.10) 45%, rgba(0,0,0,0) 78%);
-}
-html[data-effective-theme="light"] .hero-3d-glow {
-  opacity: 0.12;
-  background: radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.10) 45%, rgba(0,0,0,0) 78%);
-}
+.hero-title-wrap { position: relative; display: inline-block; max-width: 980px; overflow: visible; }
+.hero-title { position: relative; z-index: 3; max-width: 980px; }
 .hero { position: relative; padding: 140px 0 100px; overflow: hidden; }
 .hero-eyebrow { color: var(--text-dim); letter-spacing: .18em; text-transform: uppercase; font-size: 12px; }
 .hero-title { max-width: 720px;
@@ -431,9 +416,9 @@ html[data-effective-theme="light"] .cursor.is-active { border-color: rgba(0,0,0,
   section { padding: 64px 0; }
   .site-header .container { padding: 14px 0; gap: 10px; }
   .hero { padding: 100px 0 64px; }
-  .hero-title { font-size: clamp(32px, 9.4vw, 44px); line-height: 1.05; max-width: 92vw; letter-spacing: -0.012em; text-rendering: optimizeLegibility; }
-  .hero-sub { font-size: 15px; max-width: 92vw; letter-spacing: 0.005em; }
-  .section-title { font-size: clamp(22px, 6vw, 28px); letter-spacing: -0.01em; }
+  .hero-title { font-size: clamp(36px, 11vw, 50px); line-height: 1.05; max-width: 92vw; letter-spacing: -0.012em; text-rendering: optimizeLegibility; }
+  .hero-sub { font-size: 16px; max-width: 92vw; letter-spacing: 0.005em; }
+  .section-title { font-size: clamp(24px, 6.6vw, 30px); letter-spacing: -0.01em; }
   .btn { padding: 12px 16px; }
   .footer { padding: 28px 0; }
 
@@ -453,17 +438,8 @@ html[data-effective-theme="light"] .cursor.is-active { border-color: rgba(0,0,0,
 
 /* Desktop: place 3D behind the whole hero content instead of only under h1 */
 @media (min-width: 1024px) {
-  /* Make 3D span the full hero (relative to .hero), and keep h1 higher */
   .hero { padding-top: 90px; }
   .hero-content { position: static; }
-  .hero-title-wrap { position: static; }
-  .hero-3d {
-    position: absolute;
-    inset: 0; /* attach to .hero */
-    z-index: 0;
-    pointer-events: none;
-  }
-  .hero-3d canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; }
-  .hero-3d-glow { z-index: 1; opacity: 0.22; filter: blur(100px); }
-  .hero-title { margin-top: 0; }
+  .hero-title-wrap { position: static; max-width: 100%; }
+  .hero-title { margin-top: 0; max-width: 100%; }
 }
