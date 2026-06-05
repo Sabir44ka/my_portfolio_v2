@@ -53,6 +53,163 @@
         gap: 16px !important;
       }
     }
+    /* Стили для сетки скриншотов */
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.tile-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.tile-media:hover {
+  transform: scale(1.02);
+}
+
+.tile-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  object-fit: cover;
+  /* Для скриншотов телефона лучше 2:3, для десктопа 16:10 */
+  aspect-ratio: 2/3;
+  max-height: 600px;
+  transition: transform 0.3s ease;
+}
+
+.tile-media:hover img {
+  transform: scale(1.05);
+}
+
+/* Оверлей с иконкой увеличения */
+.tile-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.tile-media:hover .tile-overlay {
+  opacity: 1;
+}
+
+/* Лайтбокс */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 12px;
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  z-index: 1001;
+}
+
+.lightbox-close:hover {
+  opacity: 0.7;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 40px;
+  padding: 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s;
+  border-radius: 4px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+@media (max-width: 768px) {
+  .screenshots-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .tile-media img {
+    aspect-ratio: 2/3;
+    max-height: 500px;
+  }
+  
+  .lightbox-prev,
+  .lightbox-next {
+    font-size: 30px;
+    padding: 10px;
+  }
+  
+  .lightbox-close {
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+  }
+}
   </style>
 </head>
 <body>
@@ -197,7 +354,7 @@
     </div>
   </section>
 
-  <section class="work" data-animate>
+<section class="work" data-animate>
     <div class="container">
       <div class="section-head row between end">
         <h2 class="section-title">Скриншоты бота</h2>
@@ -206,14 +363,19 @@
       <div class="screenshots-grid">
         <!-- Скриншот 1: Диалог -->
         <div class="tile">
-          <div class="tile-media">
+          <div class="tile-media" onclick="openLightbox(this.querySelector('img'))">
             <img 
-              src="/my_project/dialog.png" 
+              src="./my_project/dialog.png" 
               alt="Диалог с ботом EVA — взаимодействие пользователя с AI-ассистентом"
               loading="lazy"
               width="600"
               height="400"
             >
+            <div class="tile-overlay">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
           <div class="tile-foot">
             <div class="tile-title">Диалог с ботом</div>
@@ -223,40 +385,58 @@
         
         <!-- Скриншот 2: Админ-панель -->
         <div class="tile">
-          <div class="tile-media">
+          <div class="tile-media" onclick="openLightbox(this.querySelector('img'))">
             <img 
-              src="/my_project/admin.png" 
-              alt="Административная панель EVA — управление товарами и заказами"
+              src="./my_project/admin.png" 
+              alt="Административная панель EVA"
               loading="lazy"
               width="600"
               height="400"
             >
+            <div class="tile-overlay">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
           <div class="tile-foot">
-            <div class="tile-title">Админ-панель</div>
+            <div class="tile-title">Админка</div>
             <div class="tile-tags">Admin</div>
           </div>
         </div>
         
         <!-- Скриншот 3: Интерфейс -->
         <div class="tile">
-          <div class="tile-media">
+          <div class="tile-media" onclick="openLightbox(this.querySelector('img'))">
             <img 
-              src="/my_project/UI.png" 
-              alt="Пользовательский интерфейс бота EVA — каталог товаров и корзина"
+              src="./my_project/UI.png" 
+              alt="Пользовательский интерфейс"
               loading="lazy"
               width="600"
               height="400"
             >
+            <div class="tile-overlay">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
           <div class="tile-foot">
-            <div class="tile-title">Интерфейс магазина</div>
+            <div class="tile-title">Интерфейс</div>
             <div class="tile-tags">UX</div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Лайтбокс для просмотра изображений -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <span class="lightbox-prev" onclick="event.stopPropagation(); changeImage(-1)">&#10094;</span>
+    <span class="lightbox-next" onclick="event.stopPropagation(); changeImage(1)">&#10095;</span>
+    <img class="lightbox-content" id="lightbox-img" src="" alt="">
+  </div>
 
   <section class="contact" data-animate>
     <div class="container">
@@ -300,5 +480,55 @@
       btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     })();
   </script>
+  <script>
+  // Лайтбокс для скриншотов
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  let currentImageIndex = 0;
+  let images = [];
+
+  function openLightbox(imgElement) {
+    // Собираем все изображения из сетки
+    images = Array.from(document.querySelectorAll('.tile-media img'));
+    currentImageIndex = images.indexOf(imgElement);
+    
+    updateLightboxImage();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function changeImage(direction) {
+    currentImageIndex += direction;
+    
+    if (currentImageIndex >= images.length) {
+      currentImageIndex = 0;
+    } else if (currentImageIndex < 0) {
+      currentImageIndex = images.length - 1;
+    }
+    
+    updateLightboxImage();
+  }
+
+  function updateLightboxImage() {
+    lightboxImg.src = images[currentImageIndex].src;
+    lightboxImg.alt = images[currentImageIndex].alt;
+  }
+
+  // Закрытие по клавише Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    } else if (e.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
+      changeImage(-1);
+    } else if (e.key === 'ArrowRight' && lightbox.classList.contains('active')) {
+      changeImage(1);
+    }
+  });
+</script>
 </body>
 </html>
