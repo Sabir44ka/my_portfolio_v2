@@ -15,6 +15,45 @@
   <!-- GSAP + ScrollTrigger -->
   <script src="https://unpkg.com/gsap@3/dist/gsap.min.js" defer></script>
   <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+  <style>
+    /* Стили для скриншотов */
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    
+    .tile-media {
+      overflow: hidden;
+      border-radius: 18px;
+      transition: transform 0.3s ease;
+    }
+    
+    .tile-media:hover {
+      transform: scale(1.02);
+    }
+    
+    .tile-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      object-fit: cover;
+      aspect-ratio: 3/2;
+      transition: transform 0.3s ease;
+    }
+    
+    .tile:hover .tile-media img {
+      transform: scale(1.05);
+    }
+    
+    @media (max-width: 768px) {
+      .screenshots-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Background cursor glow -->
@@ -162,32 +201,58 @@
     <div class="container">
       <div class="section-head row between end">
         <h2 class="section-title">Скриншоты бота</h2>
-        <span class="section-note">Плейсхолдеры — добавим ваши изображения</span>
+        <span class="section-note">Интерфейс и возможности</span>
       </div>
-      <div class="case-tiles tiles" style="display:grid;grid-template-columns:1fr;gap:14px">
+      <div class="screenshots-grid">
+        <!-- Скриншот 1: Диалог -->
         <div class="tile">
-          <div class="tile-media" style="height:auto">
-            <div style="height:320px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--border);border-radius:18px;background:var(--muted);color:var(--text-dim);">
-              <img src="/my_project/dialog.png" alt="Диалог">
-            </div>
+          <div class="tile-media">
+            <img 
+              src="/my_project/dialog.png" 
+              alt="Диалог с ботом EVA — взаимодействие пользователя с AI-ассистентом"
+              loading="lazy"
+              width="600"
+              height="400"
+            >
           </div>
-          <div class="tile-foot"><div class="tile-title">Диалог</div><div class="tile-tags">UI</div></div>
+          <div class="tile-foot">
+            <div class="tile-title">Диалог с ботом</div>
+            <div class="tile-tags">AI • UI</div>
+          </div>
         </div>
+        
+        <!-- Скриншот 2: Админ-панель -->
         <div class="tile">
-          <div class="tile-media" style="height:auto">
-            <div style="height:320px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--border);border-radius:18px;background:var(--muted);color:var(--text-dim);">
-              <img src="/my_project/admin.png" alt="Админ панель">
-            </div>
+          <div class="tile-media">
+            <img 
+              src="/my_project/admin.png" 
+              alt="Административная панель EVA — управление товарами и заказами"
+              loading="lazy"
+              width="600"
+              height="400"
+            >
           </div>
-          <div class="tile-foot"><div class="tile-title">Админка</div><div class="tile-tags">Mgmt</div></div>
+          <div class="tile-foot">
+            <div class="tile-title">Админ-панель</div>
+            <div class="tile-tags">Management</div>
+          </div>
         </div>
+        
+        <!-- Скриншот 3: Интерфейс -->
         <div class="tile">
-          <div class="tile-media" style="height:auto">
-            <div style="height:320px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--border);border-radius:18px;background:var(--muted);color:var(--text-dim);">
-              <img src="/my_project/UI.png" alt="Интерфейс">
-            </div>
+          <div class="tile-media">
+            <img 
+              src="/my_project/UI.png" 
+              alt="Пользовательский интерфейс бота EVA — каталог товаров и корзина"
+              loading="lazy"
+              width="600"
+              height="400"
+            >
           </div>
-          <div class="tile-foot"><div class="tile-title">Интерфейс</div><div class="tile-tags">API</div></div>
+          <div class="tile-foot">
+            <div class="tile-title">Интерфейс магазина</div>
+            <div class="tile-tags">UX • API</div>
+          </div>
         </div>
       </div>
     </div>
