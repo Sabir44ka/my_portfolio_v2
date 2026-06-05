@@ -4,7 +4,7 @@
 
 # Минималистичное портфолио веб-разработчика
 
-Черно-белое адаптивное портфолио. Верстка — HTML5/CSS3, чистый JavaScript, шрифты Inter и Playfair Display.
+Верстка — HTML5/CSS3, чистый JavaScript, шрифты Inter и Playfair Display.
 
 **Сайт:** https://sabir44ka.github.io/my_portfolio_v2/
 
